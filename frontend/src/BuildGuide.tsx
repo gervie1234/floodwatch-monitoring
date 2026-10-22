@@ -1,0 +1,20 @@
+import { ArrowDownToLine, Cpu, Code2, Server, Waves, ArrowRight, ShieldCheck } from 'lucide-react';
+
+const components = [
+  ['esp32','ESP32-WROOM DevKit','Processes readings and controls the station.','250-450'],
+  ['sensor','JSN-SR04T ultrasonic sensor','Measures the air gap above the water surface.','220-600'],
+  ['gps','NEO-6M GPS + antenna','Provides the monitoring station coordinates.','400-750'],
+  ['buzzer','5 V active buzzer','Provides a local audible threshold warning.','20-100'],
+  ['powerbank','20,000 mAh power bank','Backup energy; verify stable pass-through operation.','1,000-2,500'],
+  ['solar','10-20 W solar panel','Renewable power through compatible solar regulation.','800-3,500'],
+  ['enclosure','Weatherproof enclosure','Protects the circuit and secured connections.','160-600'],
+  ['jumpers','M-M and M-F jumper wires','Connect components during the bench build.','75-180'],
+];
+export default function BuildGuide(){return <div className="guide-page">
+  <section className="card guide-intro"><div><span className="eyebrow">FROM PARTS TO A MONITORING STATION</span><h2>Understand the system.<br/>Build it one step at a time.</h2><p>A practical guide to the components, wiring, software and tests behind FloodWatch.</p><a className="button primary" href="/downloads/FloodWatch-Device-Tutorial.pdf" download><ArrowDownToLine size={17}/>Download device tutorial</a></div><Waves size={88} strokeWidth={1}/></section>
+  <section className="stack-grid">{[[Code2,'Frontend','TypeScript + React + Vite','HTML and CSS for a readable, responsive interface.'],[Server,'Backend','C# + ASP.NET Core (.NET 10)','Validates and stores device telemetry through an HTTP API.'],[Cpu,'Device firmware','C++ + Arduino framework','Sensor readings, GPS, buzzer control and Wi-Fi telemetry.']].map(([Icon,title,stack,description])=>{const Symbol=Icon as typeof Code2;return <article className="card stack-card" key={String(title)}><Symbol size={24}/><small>{String(title)}</small><h3>{String(stack)}</h3><p>{String(description)}</p></article>})}</section>
+  <section className="card guide-flow"><h2>How the data moves</h2><div>{['Ultrasonic sensor','ESP32 + local buzzer','Wi-Fi + ASP.NET Core','React dashboard'].map((s,i)=><span key={s}>{s}{i<3&&<ArrowRight size={17}/>}</span>)}</div><p>Water level = mounting height above the reference datum minus the measured air gap. GPS supplies location, not internet access.</p></section>
+  <div className="section-title"><h2>Know your components</h2><p>Supplier reference photos. Estimates in Philippine pesos, not purchase quotations.</p></div><section className="parts-grid">{components.map(([key,title,description,cost])=><article className="card part-card" key={key}><div className="part-image"><img src={`/assets/parts/${key}.png`} alt={title} loading="lazy"/></div><div><h3>{title}</h3><p>{description}</p><strong>PHP {cost}</strong></div></article>)}</section>
+  <section className="card guide-budget"><div><small>ONE COMPLETE STATION</small><h2>Plan your project budget.</h2><p>The complete estimate includes the parts above, solar regulation, protection components, breadboard, mounting, cables and 15% contingency.</p></div><div className="budget-total">PHP 5,492-14,985<small>Suggested working allocation: PHP 10,000-12,000</small></div></section>
+  <section className="card guide-checks"><ShieldCheck size={25}/><div><h2>Test on the bench before mounting.</h2><p>Check each component's exact voltage and pinout. Keep 5 V sensor echo away from ESP32 GPIO using the divider in the tutorial. Confirm the regulator and bank as a compatible power chain. The solar photo shows a manufacturer kit, not a verified replacement for the separate bank design.</p><p>Photo credits: Fu-labs, Circuitrocks, PowerMav, UGREEN and DFRobot. Exact product links, detailed costs and wiring are in the tutorial. Existing computer, Wi-Fi and tools are assumed; installation labor, hosting and printing are excluded. Price references: 22 October 2026.</p></div></section>
+ </div>}

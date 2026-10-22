@@ -1,6 +1,14 @@
 # FloodWatch
 
-Local college flood-monitoring prototype. React + TypeScript + Vite frontend and ASP.NET Core (.NET 10) API. No deployment or hardware validation has been performed.
+College flood-monitoring project. React + TypeScript + Vite frontend and ASP.NET Core (.NET 10) API. Physical hardware validation is still required.
+
+## Public student review
+
+The production frontend works independently of the local API so students can review the interface on Vercel. A single **Sample readings** indicator identifies generated observations; it never claims a device is connected. History filters, charts, CSV export, alert history, read-only station configuration and the illustrated build guide are available. Public users cannot edit station settings or send device telemetry through this static site.
+
+The Vercel project uses the repository root and `vercel.json`; it installs/builds `frontend` and serves `frontend/dist`. The build copies only the component photos and FloodWatch device tutorial into public assets. ASP.NET Core is retained as the actual device API source, not represented as running on Vercel. Connecting real devices requires a separate compatible API host and durable storage.
+
+To connect a future deployed API, configure `VITE_API_BASE_URL` at frontend build time and enable appropriate API HTTPS, authentication and CORS. No device key belongs in a Vite environment variable. Local `pnpm dev` still uses the Vite proxy and local ASP.NET Core API.
 
 ## Run locally
 

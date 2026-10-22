@@ -7,5 +7,10 @@ frontend/dist/
 backend/Data/
 tmp/
 .env
+.env.*
+!.env.example
+.vercel/
+frontend/public/assets/parts/
+frontend/public/downloads/
 firmware/FloodWatch/config.h
 .DS_Store
