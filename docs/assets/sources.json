@@ -1,0 +1,191 @@
+[
+  {
+    "key": "esp32",
+    "title": "ESP32 Development Board WiFi+Bluetooth Ultra-Low Power Consumption Dual Core ESP-32 ESP-32S ESP 32 Similar ESP8266",
+    "url": "https://fulabs.ph/products/esp32-development-board-wifi-bluetooth-ultra-low-power-consumption-dual-core-esp-32-esp-32s-esp-32-similar-esp8266",
+    "pricePhp": 284.0,
+    "imageUrl": "https://cdn.shopify.com/s/files/1/0688/6775/2001/files/sg-11134201-7rfh8-m3vep6wiuc6f53.jpg?v=1764814766",
+    "variants": [
+      {
+        "title": "ESP32-30P-MICRO-CP2102",
+        "pricePhp": 284.0
+      },
+      {
+        "title": "ESP32-30P-TypeC-CP2102",
+        "pricePhp": 295.0
+      },
+      {
+        "title": "ESP32-30P-TypeC-FT232",
+        "pricePhp": 319.0
+      },
+      {
+        "title": "ESP32-38P-MICRO-CP2102",
+        "pricePhp": 284.0
+      },
+      {
+        "title": "ESP32-38P-TypeC-CP2102",
+        "pricePhp": 295.0
+      },
+      {
+        "title": "ESP32-30P-TYPEC-CH340",
+        "pricePhp": 240.0
+      },
+      {
+        "title": "ESP32-38P-MICRO-CH9102",
+        "pricePhp": 251.0
+      },
+      {
+        "title": "ESP-WROOM-32U",
+        "pricePhp": 295.0
+      },
+      {
+        "title": "ESP-32 WROOM 32D-16N(chip only",
+        "pricePhp": 284.0
+      },
+      {
+        "title": "30 PIN Expansion Board",
+        "pricePhp": 64.0
+      },
+      {
+        "title": "38P - Shield Board",
+        "pricePhp": 86.0
+      },
+      {
+        "title": "DEVKIT V1 Expansion Board",
+        "pricePhp": 68.0
+      }
+    ],
+    "file": "docs/assets/esp32.png",
+    "selectedVariant": "ESP32-30P-MICRO-CP2102",
+    "accessed": "2026-10-22"
+  },
+  {
+    "key": "sensor",
+    "title": "1pcs Waterproof Ultrasonic Module JSN-SR04T / AJ-SR04M Water Proof Integrated Distance Measuring Transducer Sensor for Arduino",
+    "url": "https://fulabs.ph/products/1pcs-waterproof-ultrasonic-module-jsn-sr04t-aj-sr04m-water-proof-integrated-distance-measuring-transducer-sensor-for-arduino",
+    "pricePhp": 220.0,
+    "imageUrl": "https://cdn.shopify.com/s/files/1/0688/6775/2001/files/sg-11134201-821g0-mgyidaqphwjz92.jpg?v=1767517387",
+    "variants": [
+      {
+        "title": "Default Title",
+        "pricePhp": 557.0
+      }
+    ],
+    "file": "docs/assets/sensor.png",
+    "accessed": "2026-10-22"
+  },
+  {
+    "key": "gps",
+    "title": "GY-NEO-6M GPS Active Antenna Module - UART NMEA",
+    "url": "https://circuit.rocks/products/gy-neo-6m-gps-active-module",
+    "pricePhp": 692.0,
+    "imageUrl": "https://cdn.shopify.com/s/files/1/0777/1491/5617/files/3404e3ca-0645-41b4-83f0-83dc1c163d7c.png?v=1787792070",
+    "variants": [
+      {
+        "title": "Default Title",
+        "pricePhp": 692.0
+      }
+    ],
+    "file": "docs/assets/gps.png",
+    "accessed": "2026-10-22"
+  },
+  {
+    "key": "enclosure",
+    "title": "Waterproof Junction Box IP65 ABS - Outdoor Cable Enclosure",
+    "url": "https://circuit.rocks/products/waterproof-junction-box-ip55-and-ip65-electrical-cable-enclosure-abs",
+    "pricePhp": 45.0,
+    "imageUrl": "https://cdn.shopify.com/s/files/1/0777/1491/5617/files/SHOPIFY_PHOTO_SIZE_70mm_028158bf-d7fc-441b-a714-1e9e2e82deef.png?v=1764830515",
+    "variants": [
+      {
+        "title": "200x100x70mm IP65",
+        "pricePhp": 160.0
+      },
+      {
+        "title": "50x50mm IP55",
+        "pricePhp": 45.0
+      },
+      {
+        "title": "80x50mm IP55",
+        "pricePhp": 55.0
+      },
+      {
+        "title": "85x85x50mm IP55",
+        "pricePhp": 65.0
+      },
+      {
+        "title": "100x100x70mm IP65",
+        "pricePhp": 95.0
+      },
+      {
+        "title": "150x110x70mm IP65",
+        "pricePhp": 145.0
+      },
+      {
+        "title": "150x150x70mm IP65",
+        "pricePhp": 155.0
+      },
+      {
+        "title": "200x155x80mm IP65",
+        "pricePhp": 185.0
+      },
+      {
+        "title": "200x200x80mm IP65",
+        "pricePhp": 275.0
+      },
+      {
+        "title": "255\u00d7200\u00d780mm IP65",
+        "pricePhp": 295.0
+      },
+      {
+        "title": "300\u00d7250\u00d7120mm IP65",
+        "pricePhp": 595.0
+      },
+      {
+        "title": "400X350X120mm IP65",
+        "pricePhp": 1026.0
+      }
+    ],
+    "file": "docs/assets/enclosure.png",
+    "accessed": "2026-10-22"
+  },
+  {
+    "key": "jumpers",
+    "title": "Jumper Wires DuPont Line 10/20/30cm Arduino",
+    "url": "https://circuit.rocks/products/jumper-wires-dupont-line-10-20-30-cm-arduino-compatible",
+    "pricePhp": 35.0,
+    "imageUrl": "https://cdn.shopify.com/s/files/1/0777/1491/5617/files/jumper-wires-dupont-line-10-20-30-cm-arduino-compatible-14.jpg?v=1782213509",
+    "variants": [
+      {
+        "title": "Default Title",
+        "pricePhp": 37.0
+      }
+    ],
+    "file": "docs/assets/jumpers.png",
+    "selectedVariant": "F-M 20CM 20PCS WIRE",
+    "accessed": "2026-10-22"
+  },
+  {
+    "key": "buzzer",
+    "title": "buzzer",
+    "url": "https://powermavelectronics.com/shop/speaker/2pcs-5v-active-buzzer/",
+    "imageUrl": "https://powermavelectronics.com/wp-content/uploads/2024/01/SP001_2pcs_5v_active_buzzer_4.jpg",
+    "file": "docs/assets/buzzer.png",
+    "accessed": "2026-10-22"
+  },
+  {
+    "key": "powerbank",
+    "title": "powerbank",
+    "url": "https://www.ugreen.com/en-ph/products/ph-55996",
+    "imageUrl": "http://www.ugreen.com/cdn/shop/files/55996B.webp?v=1768478553",
+    "file": "docs/assets/powerbank.png",
+    "accessed": "2026-10-22"
+  },
+  {
+    "key": "solar",
+    "title": "DFRobot KIT0210 complete kit, panel identification only",
+    "url": "https://www.dfrobot.com/product-2925.html",
+    "imageUrl": "https://dfimg.dfrobot.com/enshop/image/data/KIT0210/KIT0210_ShipList_06.jpg",
+    "file": "docs/assets/solar.png",
+    "accessed": "2026-10-22"
+  }
+]
