@@ -4,6 +4,10 @@ College flood-monitoring project. React + TypeScript + Vite frontend and ASP.NET
 
 ## Public student review
 
+- Website: https://floodwatch-monitoring.vercel.app/
+- Source: https://github.com/gervie1234/floodwatch-monitoring
+- Device tutorial: https://floodwatch-monitoring.vercel.app/downloads/FloodWatch-Device-Tutorial.pdf
+
 The production frontend works independently of the local API so students can review the interface on Vercel. A single **Sample readings** indicator identifies generated observations; it never claims a device is connected. History filters, charts, CSV export, alert history, read-only station configuration and the illustrated build guide are available. Public users cannot edit station settings or send device telemetry through this static site.
 
 The Vercel project uses the repository root and `vercel.json`; it installs/builds `frontend` and serves `frontend/dist`. The build copies only the component photos and FloodWatch device tutorial into public assets. ASP.NET Core is retained as the actual device API source, not represented as running on Vercel. Connecting real devices requires a separate compatible API host and durable storage.
@@ -74,3 +78,5 @@ pnpm build
 ```
 
 Browser checks cover overview, history filters, alerts, settings and responsive layout. Device behavior and real peer networking remain separate hardware tests. Tutorial and firmware describe the intended bench workflow, not completed device validation.
+
+`python tests/published_site.py` checks anonymous public access, the deployed JavaScript against the local build, the tutorial PDF, all eight component images and repository visibility. It makes read-only public requests without account credentials.
