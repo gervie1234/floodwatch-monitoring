@@ -1,0 +1,33 @@
+/* Readable text hierarchy, including compact laptop and mobile layouts. */
+:root{color:#263f40;font-size:15px}
+.brand small{color:#536d67;font-size:9px}
+.workspace{font-size:12px}.workspace small{font-size:11px;color:#617871}
+.nav-label{font-size:10px;color:#62786f}.nav-item{font-size:13px;color:#536b64}
+.prototype strong{font-size:14px;color:#304f42}.prototype p{font-size:12px;color:#5c7467}
+.help{font-size:11px;color:#526e62}.profile{font-size:12px}.profile small{font-size:10px;color:#657a70}
+.local-pill{color:#5d7569;font-size:9px}.breadcrumb{font-size:12px;color:#657a73}.breadcrumb strong{color:#36564a}
+.date{font-size:12px;color:#5d7368}.icon-button{color:#5c776b}
+.eyebrow{font-size:10px;color:#4e7360}.page-heading h1{font-size:30px;color:#203c32}
+.page-heading p{font-size:13px;line-height:1.7;color:#5c7168}
+.button{font-size:12px}.source-banner{font-size:11px;color:#536f5e}.source-banner strong{font-size:11px;color:#345f48}
+.mode{font-size:11px;color:#456851}.metric-title{font-size:12px;color:#556f61}.metric-title svg{color:#668a75}
+.metric-value{font-size:35px}.metric-value small{font-size:14px;color:#677f70}
+.metric-foot{font-size:11px;color:#61786b}.badge{font-size:10px;padding:5px 8px}
+.badge.normal{color:#23684b}.badge.advisory{color:#56671e}.badge.warning{color:#8a6515}.badge.critical{color:#a23b30}
+.muted-dot{background:#718e7a}.connection-value,.power-value{font-size:20px;color:#2c5140}
+.card-heading h2{font-size:15px;color:#294737}.card-heading p{font-size:12px;line-height:1.6;color:#63796b}
+select{font-size:12px;color:#496553}.chart-legend{font-size:11px;color:#5b7466}.chart text{font-size:12px;fill:#647a6b}
+.chart-footer{font-size:10px;color:#617a6a}.station-name h3{font-size:13px;color:#304f3e}
+.device-id{font-size:10px;color:#5b7565}.detail-row{font-size:11px;color:#5f7867}.visual-label{font-size:8px;color:#345f46}
+.text-button,.station-details .text-button{font-size:12px;color:#176d54}
+th{font-size:10px;color:#5a7564;letter-spacing:.45px}td{font-size:12px;color:#526d5c}
+td svg{color:#6b8b76}.number{font-size:13px;color:#34543f}.number span{font-size:11px;color:#657c6c}.mono{font-size:11px}
+.threshold-row{font-size:12px}.threshold-row>span:last-child{font-size:11px;color:#61796a}.threshold-note{font-size:11px;color:#607969}
+.footer{font-size:10px;color:#627c6b}.footer-sep{color:#8b9f91}.small-count{font-size:11px;color:#4e715c}
+.event strong{font-size:14px}.event p{font-size:12px;color:#5b7463}.event small{font-size:11px;color:#637e6a}
+.empty h3{font-size:14px;color:#526f5d}.empty p{font-size:12px;color:#627d6b}
+.form-grid label{font-size:13px;color:#46654f}.form-grid small{font-size:12px;color:#617b68}
+.config-note p{font-size:13px;color:#55725d}.config-note h3{font-size:14px}
+.modal p{color:#536f5e}.loading{font-size:12px;color:#55715e}
+@media(max-width:1200px){.brand{font-size:21px}.metric-foot{font-size:10px}.connection-value,.power-value{font-size:18px}.card-heading h2{font-size:14px}.chart-footer{font-size:10px}.station-name h3{font-size:12px}}
+@media(max-width:700px){.breadcrumb{font-size:11px}.page-heading h1{font-size:28px}.page-heading p{font-size:13px}.source-banner strong,.mode{font-size:10px}.metric-title{font-size:12px}.metric-value{font-size:32px}.metric-foot{font-size:10px}.connection-value,.power-value{font-size:17px}.card-heading h2{font-size:15px}.card-heading p{font-size:12px}.chart-legend{font-size:10px}.chart-footer{font-size:9px}.station-name h3{font-size:13px}.detail-row{font-size:12px}.footer{font-size:10px}.event p{font-size:12px}.filters{flex-wrap:wrap}}

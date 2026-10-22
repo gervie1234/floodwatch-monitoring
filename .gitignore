@@ -1,0 +1,11 @@
+**/node_modules/
+**/.pnpm-store/
+*.tsbuildinfo
+**/bin/
+**/obj/
+frontend/dist/
+backend/Data/
+tmp/
+.env
+firmware/FloodWatch/config.h
+.DS_Store
