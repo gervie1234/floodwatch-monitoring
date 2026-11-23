@@ -3,7 +3,6 @@
 .brand small{color:#536d67;font-size:9px}
 .workspace{font-size:12px}.workspace small{font-size:11px;color:#617871}
 .nav-label{font-size:10px;color:#62786f}.nav-item{font-size:13px;color:#536b64}
-.prototype strong{font-size:14px;color:#304f42}.prototype p{font-size:12px;color:#5c7467}
 .help{font-size:11px;color:#526e62}.profile{font-size:12px}.profile small{font-size:10px;color:#657a70}
 .local-pill{color:#5d7569;font-size:9px}.breadcrumb{font-size:12px;color:#657a73}.breadcrumb strong{color:#36564a}
 .date{font-size:12px;color:#5d7368}.icon-button{color:#5c776b}
@@ -31,3 +30,106 @@ td svg{color:#6b8b76}.number{font-size:13px;color:#34543f}.number span{font-size
 .modal p{color:#536f5e}.loading{font-size:12px;color:#55715e}
 @media(max-width:1200px){.brand{font-size:21px}.metric-foot{font-size:10px}.connection-value,.power-value{font-size:18px}.card-heading h2{font-size:14px}.chart-footer{font-size:10px}.station-name h3{font-size:12px}}
 @media(max-width:700px){.breadcrumb{font-size:11px}.page-heading h1{font-size:28px}.page-heading p{font-size:13px}.source-banner strong,.mode{font-size:10px}.metric-title{font-size:12px}.metric-value{font-size:32px}.metric-foot{font-size:10px}.connection-value,.power-value{font-size:17px}.card-heading h2{font-size:15px}.card-heading p{font-size:12px}.chart-legend{font-size:10px}.chart-footer{font-size:9px}.station-name h3{font-size:13px}.detail-row{font-size:12px}.footer{font-size:10px}.event p{font-size:12px}.filters{flex-wrap:wrap}}
+
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 100;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: #fff;
+  color: #17634e;
+  transform: translateY(calc(-100% - 16px));
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+:focus-visible {
+  outline: 2px solid #176d54;
+  outline-offset: 3px;
+}
+
+.sidebar {
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+@media (max-height: 650px) {
+  .sidebar {
+    padding-top: 16px;
+  }
+
+  .workspace {
+    margin-top: 16px;
+  }
+
+  .nav-label {
+    margin-block: 16px 8px;
+  }
+
+  .nav-item {
+    padding-block: 11px;
+    margin-bottom: 3px;
+  }
+
+  .help {
+    margin-block: 14px;
+  }
+
+  .profile {
+    padding-block: 12px;
+  }
+}
+
+@media (max-height: 500px) {
+  .workspace,
+  .profile {
+    display: none;
+  }
+}
+
+dialog.modal {
+  width: calc(100% - 40px);
+  max-height: calc(100% - 40px);
+  border: 1px solid #dcebe4;
+  color: inherit;
+}
+
+dialog.modal::backdrop {
+  background: #163f3466;
+}
+
+@media (max-width: 700px) {
+  .sidebar:not(.open) {
+    visibility: hidden;
+  }
+
+  .lower-grid table th,
+  .lower-grid table td {
+    padding-inline: 10px;
+  }
+
+  .lower-grid table th:last-child,
+  .lower-grid table td:last-child {
+    display: none;
+  }
+}
+
+@media (max-width: 360px) {
+  .lower-grid th {
+    white-space: normal;
+  }
+
+  .lower-grid td svg {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebar {
+    transition: none;
+  }
+}

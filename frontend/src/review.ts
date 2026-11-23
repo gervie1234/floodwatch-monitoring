@@ -1,7 +1,9 @@
 /** Public review builds never imply that a physical monitoring station is online. */
-export const publicReview = import.meta.env.VITE_REVIEW_MODE === 'true' ||
-  (import.meta.env.PROD && !import.meta.env.VITE_API_BASE_URL);
-export const apiBase = (import.meta.env.VITE_API_BASE_URL ?? '').replace(/\/$/, '');
+export const localDashboard = import.meta.env.VITE_LOCAL_DASHBOARD === 'true';
+export const apiBase = localDashboard ? '' : (import.meta.env.VITE_API_BASE_URL ?? '').trim().replace(/\/+$/, '');
+export const publicReview = !localDashboard && (import.meta.env.VITE_REVIEW_MODE === 'true' ||
+  (import.meta.env.PROD && !apiBase));
+export const initialDemoMode = !localDashboard && (publicReview || !apiBase);
 
 export function sampleReadings(heightCm:number) {
   const now = Date.now();

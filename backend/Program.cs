@@ -5,17 +5,45 @@ using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.UseUrls(builder.Configuration["FLOODWATCH_URL"] ?? "http://127.0.0.1:5086");
+var hosted = builder.Configuration.GetValue<bool>("FLOODWATCH_HOSTED");
+var publicGps = !hosted || builder.Configuration.GetValue<bool>("FLOODWATCH_PUBLIC_GPS");
+var deviceKeyFile = builder.Configuration["DEVICE_API_KEY_FILE"];
+var deviceKey = string.IsNullOrWhiteSpace(deviceKeyFile)
+    ? builder.Configuration["DEVICE_API_KEY"]
+    : File.ReadAllText(deviceKeyFile).Trim();
+if (hosted) {
+    var origin = builder.Configuration["FLOODWATCH_DASHBOARD_ORIGIN"];
+    if (!Uri.TryCreate(origin, UriKind.Absolute, out var dashboard) || dashboard.Scheme != Uri.UriSchemeHttps ||
+        origin != dashboard.GetLeftPart(UriPartial.Authority) || !string.IsNullOrEmpty(dashboard.UserInfo))
+        throw new InvalidOperationException("FLOODWATCH_DASHBOARD_ORIGIN must be an exact HTTPS origin without a trailing slash.");
+    if (string.IsNullOrWhiteSpace(deviceKey) || deviceKey.Length < 32)
+        throw new InvalidOperationException("Hosted device ingestion requires a key of at least 32 characters.");
+
+    builder.Services.AddCors(options => options.AddDefaultPolicy(policy => policy.WithOrigins(origin).WithMethods("GET")));
+}
+var deviceKeyHash = string.IsNullOrWhiteSpace(deviceKey) ? null : SHA256.HashData(Encoding.UTF8.GetBytes(deviceKey));
 builder.Services.AddSingleton<Store>();
 var app = builder.Build();
+if (hosted) app.UseCors();
+if (!hosted && builder.Configuration.GetValue<bool>("FLOODWATCH_LOCAL_DASHBOARD")) {
+    app.UseWhen(ctx => ctx.Connection.RemoteIpAddress is { } ip && IPAddress.IsLoopback(ip), dashboard => {
+        dashboard.UseDefaultFiles();
+        dashboard.UseStaticFiles();
+    });
+}
 app.Use(async (ctx, next) => {
     if (ctx.Request.Path.StartsWithSegments("/api/settings") && ctx.Request.Method == "PUT" &&
-        (ctx.Connection.RemoteIpAddress is not { } ip || !IPAddress.IsLoopback(ip))) {
+        (hosted || ctx.Connection.RemoteIpAddress is not { } ip || !IPAddress.IsLoopback(ip))) {
         ctx.Response.StatusCode = 403; return;
     }
     await next();
 });
-app.MapGet("/api/health", () => Results.Ok(new { status = "ok", service = "FloodWatch API" }));
-app.MapGet("/api/settings", (Store s) => s.Settings);
+app.MapGet("/api/health", (Store _) => Results.Ok(new { status = "ok", service = "FloodWatch API" }));
+app.MapGet("/api/settings", (Store s) => {
+    var settings = s.Settings;
+    if (!hosted) return Results.Ok(settings);
+    return Results.Ok(new { settings.Name, settings.HeightCm, settings.AdvisoryCm, settings.WarningCm, settings.CriticalCm, publicGps });
+});
 app.MapPut("/api/settings", (Settings settings, Store s) => {
     if (string.IsNullOrWhiteSpace(settings.Name) || settings.Name.Length > 80 ||
         !double.IsFinite(settings.HeightCm) || !double.IsFinite(settings.AdvisoryCm) ||
@@ -27,12 +55,16 @@ app.MapPut("/api/settings", (Settings settings, Store s) => {
     s.SaveSettings(settings);
     return Results.Ok(settings);
 });
-app.MapGet("/api/readings", (bool? demo, Store s) => demo == true ? Demo.Readings(s.Settings) : s.Readings());
-app.MapPost("/api/readings", (Telemetry input, HttpContext ctx, Store s, IConfiguration config) => {
-    var expected = config["DEVICE_API_KEY"];
-    if (string.IsNullOrWhiteSpace(expected)) return Results.Problem("Device ingestion is disabled. Configure DEVICE_API_KEY on the API server.", statusCode:503);
+app.MapGet("/api/readings", (bool? demo, HttpContext ctx, Store s) => {
+    if (hosted) ctx.Response.Headers.CacheControl = "no-store";
+    if (demo == true) return Demo.Readings(s.Settings);
+    var readings = s.Readings();
+    return publicGps ? readings : readings.Select(reading => reading with { Latitude = null, Longitude = null }).ToArray();
+});
+app.MapPost("/api/readings", (Telemetry input, HttpContext ctx, Store s) => {
+    if (deviceKeyHash is null) return Results.Problem("Device ingestion is disabled. Configure the device key on the API server.", statusCode:503);
     var supplied = ctx.Request.Headers["X-Device-Key"].ToString();
-    if (!CryptographicOperations.FixedTimeEquals(SHA256.HashData(Encoding.UTF8.GetBytes(expected)), SHA256.HashData(Encoding.UTF8.GetBytes(supplied)) )) return Results.Unauthorized();
+    if (!CryptographicOperations.FixedTimeEquals(deviceKeyHash, SHA256.HashData(Encoding.UTF8.GetBytes(supplied)))) return Results.Unauthorized();
     if (input.DeviceId != "FW-001" || string.IsNullOrWhiteSpace(input.BootId) || input.BootId.Length > 80 || input.Sequence < 0 ||
         !double.IsFinite(input.DistanceCm) || input.DistanceCm < 30 || input.DistanceCm > s.Settings.HeightCm ||
         input.ObservedAtUtc > DateTimeOffset.UtcNow.AddMinutes(1) || input.ObservedAtUtc < DateTimeOffset.UtcNow.AddDays(-7) ||
@@ -54,8 +86,9 @@ class Store {
     private readonly string dir;
     private List<Reading> data = [];
     public Settings Settings { get; private set; } = new();
-    public Store(IWebHostEnvironment env) {
-        dir = Path.Combine(env.ContentRootPath,"Data"); Directory.CreateDirectory(dir);
+    public Store(IWebHostEnvironment env, IConfiguration config) {
+        dir = config["FLOODWATCH_DATA_DIR"] ?? Path.Combine(env.ContentRootPath,"Data");
+        Directory.CreateDirectory(dir);
         var rp=Path.Combine(dir,"readings.json"); var sp=Path.Combine(dir,"settings.json");
         if(File.Exists(rp)) data=JsonSerializer.Deserialize<List<Reading>>(File.ReadAllText(rp)) ?? [];
         if(File.Exists(sp)) Settings=JsonSerializer.Deserialize<Settings>(File.ReadAllText(sp)) ?? new();
