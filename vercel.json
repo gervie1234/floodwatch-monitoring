@@ -2,8 +2,12 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
   "installCommand": "corepack pnpm --dir frontend install --frozen-lockfile",
-  "buildCommand": "corepack pnpm --dir frontend build",
+  "buildCommand": "VITE_VERCEL_ENV=\"$VERCEL_ENV\" corepack pnpm --dir frontend build",
   "outputDirectory": "frontend/dist",
+  "rewrites": [
+    {"source":"/station/api/settings","destination":"https://megalight.tail81050c.ts.net:8443/api/settings"},
+    {"source":"/station/api/readings","destination":"https://megalight.tail81050c.ts.net:8443/api/readings"}
+  ],
   "headers": [
     {"source":"/(.*)","headers":[{"key":"X-Content-Type-Options","value":"nosniff"},{"key":"Referrer-Policy","value":"strict-origin-when-cross-origin"},{"key":"X-Frame-Options","value":"DENY"}]}
   ]

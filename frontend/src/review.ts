@@ -1,6 +1,9 @@
 /** Public review builds never imply that a physical monitoring station is online. */
 export const localDashboard = import.meta.env.VITE_LOCAL_DASHBOARD === 'true';
-export const apiBase = localDashboard ? '' : (import.meta.env.VITE_API_BASE_URL ?? '').trim().replace(/\/+$/, '');
+const configuredApi = (import.meta.env.VITE_API_BASE_URL ?? '').trim().replace(/\/+$/, '');
+// Vercel sends public dashboard requests through its same-origin rewrite.
+const useVercelProxy = import.meta.env.VITE_VERCEL_ENV === 'production' && Boolean(configuredApi);
+export const apiBase = localDashboard ? '' : useVercelProxy ? '/station' : configuredApi;
 export const publicReview = !localDashboard && (import.meta.env.VITE_REVIEW_MODE === 'true' ||
   (import.meta.env.PROD && !apiBase));
 export const initialDemoMode = !localDashboard && (publicReview || !apiBase);
